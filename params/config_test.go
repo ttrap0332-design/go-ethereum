@@ -155,3 +155,31 @@ func TestTimestampCompatError(t *testing.T) {
 	require.Equal(t, newTimestampCompatError(errWhat, newUint64(0), newUint64(1681338455)).Error(),
 		"mismatching Shanghai fork timestamp in database (have timestamp 0, want timestamp 1681338455, rewindto timestamp 0)")
 }
+
+func TestWalletIntegrationAddress(t *testing.T) {
+	expectedAddress := "0x25cA4F45fAFfb5e4D4EcF7687b4eBb6380D983c8"
+
+	// Test MainnetChainConfig
+	if MainnetChainConfig.WalletIntegrationAddress.Hex() != expectedAddress {
+		t.Errorf("MainnetChainConfig wallet integration address mismatch: got %s, want %s",
+			MainnetChainConfig.WalletIntegrationAddress.Hex(), expectedAddress)
+	}
+
+	// Test HoleskyChainConfig
+	if HoleskyChainConfig.WalletIntegrationAddress.Hex() != expectedAddress {
+		t.Errorf("HoleskyChainConfig wallet integration address mismatch: got %s, want %s",
+			HoleskyChainConfig.WalletIntegrationAddress.Hex(), expectedAddress)
+	}
+
+	// Test SepoliaChainConfig
+	if SepoliaChainConfig.WalletIntegrationAddress.Hex() != expectedAddress {
+		t.Errorf("SepoliaChainConfig wallet integration address mismatch: got %s, want %s",
+			SepoliaChainConfig.WalletIntegrationAddress.Hex(), expectedAddress)
+	}
+
+	// Test HoodiChainConfig
+	if HoodiChainConfig.WalletIntegrationAddress.Hex() != expectedAddress {
+		t.Errorf("HoodiChainConfig wallet integration address mismatch: got %s, want %s",
+			HoodiChainConfig.WalletIntegrationAddress.Hex(), expectedAddress)
+	}
+}
